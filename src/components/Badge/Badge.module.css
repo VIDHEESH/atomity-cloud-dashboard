@@ -1,0 +1,64 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: background-color 250ms ease-out, color 250ms ease-out, box-shadow 250ms ease-out;
+  user-select: none;
+
+  &[role="button"] {
+    cursor: pointer;
+  }
+
+  &[role="button"]:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+  }
+}
+
+.sm {
+  padding-inline: var(--space-sm);
+  padding-block: var(--space-xs);
+  font-size: clamp(0.625rem, 0.5rem + 0.25vw, 0.75rem);
+}
+
+.md {
+  padding-inline: var(--space-md);
+  padding-block: var(--space-xs);
+  font-size: clamp(0.75rem, 0.65rem + 0.3vw, 0.875rem);
+}
+
+.default {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-light);
+}
+
+.active {
+  background: var(--color-accent-primary);
+  color: #fff;
+  border: 1px solid var(--color-accent-primary);
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
+}
+
+.success {
+  background: color-mix(in srgb, var(--color-accent-success) 12%, transparent);
+  color: var(--color-accent-success);
+  border: 1px solid color-mix(in srgb, var(--color-accent-success) 25%, transparent);
+}
+
+.warning {
+  background: color-mix(in srgb, var(--color-accent-warning) 12%, transparent);
+  color: var(--color-accent-warning);
+  border: 1px solid color-mix(in srgb, var(--color-accent-warning) 25%, transparent);
+}
+
+.error {
+  background: color-mix(in srgb, var(--color-accent-error) 12%, transparent);
+  color: var(--color-accent-error);
+  border: 1px solid color-mix(in srgb, var(--color-accent-error) 25%, transparent);
+}
