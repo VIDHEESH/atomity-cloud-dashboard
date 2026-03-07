@@ -1,0 +1,164 @@
+.tableWrapper {
+  inline-size: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-lg);
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-primary);
+
+  & thead {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+  }
+
+  & th {
+    padding: var(--space-sm) var(--space-md);
+    font-size: clamp(0.65rem, 0.55rem + 0.25vw, 0.8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    border-block-end: 1px solid var(--color-border-light);
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  & th:first-child {
+    text-align: start;
+  }
+
+  .nameCol {
+  text-align: start !important;
+  min-inline-size: 120px;
+}
+
+.dataRow {
+  transition: background-color 200ms ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--color-accent-primary) 4%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: -2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* :has() — style row differently if it contains the active total cell */
+  &:has(.totalCell span) {
+    & .nameText {
+      letter-spacing: 0.01em;
+    }
+  }
+
+  & td {
+    padding: var(--space-sm) var(--space-md);
+    font-size: clamp(0.8rem, 0.7rem + 0.25vw, 0.95rem);
+    color: var(--color-text-primary);
+    border-block-end: 1px solid var(--color-border-light);
+    text-align: end;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  & td:first-child {
+    text-align: start;
+    font-family: var(--font-primary);
+    font-weight: 600;
+  }
+}
+
+.activeRow {
+  background-color: color-mix(in srgb, var(--color-accent-primary) 6%, transparent) !important;
+
+  & td {
+    border-block-end-color: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+  }
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nameText {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.drillHint {
+  display: inline-flex;
+  color: var(--color-text-muted);
+  transition: color 200ms ease-out, transform 200ms ease-out;
+  opacity: 0;
+
+  .dataRow:hover & {
+    opacity: 1;
+    color: var(--color-accent-primary);
+    transform: translateX(2px);
+  }
+}
+
+.valueCell {
+  font-variant-numeric: tabular-nums;
+}
+
+.totalCell {
+  color: var(--color-accent-primary) !important;
+  font-weight: 700 !important;
+
+  & span {
+    color: var(--color-accent-primary);
+  }
+}
+
+.efficiencyCell {
+  & span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: var(--space-sm);
+    padding-block: 2px;
+    border-radius: var(--radius-full);
+    font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+    font-weight: 600;
+  }
+}
+
+.effGood span {
+  background: color-mix(in srgb, var(--color-accent-success) 12%, transparent);
+  color: var(--color-accent-success);
+}
+
+.effWarning span {
+  background: color-mix(in srgb, var(--color-accent-warning) 12%, transparent);
+  color: var(--color-accent-warning);
+}
+
+.effCritical span {
+  background: color-mix(in srgb, var(--color-accent-error) 12%, transparent);
+  color: var(--color-accent-error);
+}
+
+/* Responsive: hide less important columns on smaller containers */
+@container dashboard (max-width: 640px) {
+  .table th:nth-child(4),
+  .table td:nth-child(4),
+  .table th:nth-child(5),
+  .table td:nth-child(5),
+  .table th:nth-child(6),
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+
