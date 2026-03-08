@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import AnimatedNumber from "@/components/AnimatedNumber/AnimatedNumber";
 import styles from "./AnimatedBarChart.module.css";
 import type { ClusterResource, NamespaceResource } from "@/types";
 
@@ -32,7 +33,11 @@ export default function AnimatedBarChart({
               key={item.id}
               className={`${styles.barGroup} ${isActive ? styles.active : ""}`}
               initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              animate={
+                isInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 30 }
+              }
               transition={{
                 delay: shouldReduceMotion ? 0 : index * 0.1,
                 duration: shouldReduceMotion ? 0 : 0.5,
@@ -53,18 +58,32 @@ export default function AnimatedBarChart({
                 <motion.div
                   className={styles.barValue}
                   initial={{ opacity: 0, y: -8 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+                  animate={
+                    isInView
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: -8 }
+                  }
                   transition={{
                     delay: shouldReduceMotion ? 0 : index * 0.1 + 0.4,
                     duration: shouldReduceMotion ? 0 : 0.3,
                   }}
                 >
-                  ${item.total.toLocaleString()}
+                  <AnimatedNumber
+                    value={item.total}
+                    prefix="$"
+                    isInView={isInView}
+                    delay={index * 0.1 + 0.5}
+                    duration={1.4}
+                  />
                 </motion.div>
                 <motion.div
                   className={styles.bar}
                   initial={{ height: 0 }}
-                  animate={isInView ? { height: `${heightPercent}%` } : { height: 0 }}
+                  animate={
+                    isInView
+                      ? { height: `${heightPercent}%` }
+                      : { height: 0 }
+                  }
                   transition={{
                     delay: shouldReduceMotion ? 0 : index * 0.1 + 0.15,
                     duration: shouldReduceMotion ? 0 : 0.7,
@@ -80,6 +99,7 @@ export default function AnimatedBarChart({
         })}
       </div>
 
+      {/* Dashed ceiling line */}
       <motion.div
         className={styles.ceilingLine}
         initial={{ scaleX: 0 }}

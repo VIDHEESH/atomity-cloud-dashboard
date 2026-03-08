@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import AnimatedNumber from "@/components/AnimatedNumber/AnimatedNumber";
 import styles from "./DataTable.module.css";
 import type { ClusterResource, NamespaceResource } from "@/types";
 
@@ -104,11 +105,14 @@ export default function DataTable({
                       key={col.key}
                       className={`${styles.valueCell} ${isEfficiency ? `${styles.efficiencyCell} ${effClass}` : ""}`}
                     >
-                      <span>
-                        {isEfficiency ? "" : "$"}
-                        {value.toLocaleString()}
-                        {isEfficiency ? "%" : ""}
-                      </span>
+                      <AnimatedNumber
+                        value={value}
+                        prefix={isEfficiency ? "" : "$"}
+                        suffix={isEfficiency ? "%" : ""}
+                        isInView={isInView}
+                        delay={0.5 + rowIndex * 0.08 + colIndex * 0.03}
+                        duration={1.0}
+                      />
                     </td>
                   );
                 })}
