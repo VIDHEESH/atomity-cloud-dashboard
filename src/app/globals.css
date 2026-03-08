@@ -77,12 +77,17 @@
   --shadow-glow: 0 0 40px rgba(62, 207, 123, 0.12);
 }
 
+/* Tailwind theme */
 @theme inline {
   --color-background: var(--color-bg-primary);
   --color-foreground: var(--color-text-primary);
   --font-sans: var(--font-primary);
   --font-mono: var(--font-mono);
 }
+
+/* ==============================================
+   GLOBAL RESET & BASE
+   ============================================== */
 
 *,
 *::before,
@@ -92,8 +97,12 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+}
+
 body {
-  transition: background-color 400ms ease-out, color 400ms ease-out;
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-primary);
@@ -101,161 +110,12 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-accent-primary);
-  outline-offset: 2px;
+  transition: background-color 400ms ease-out, color 400ms ease-out;
 }
 
 /* ==============================================
-   HERO / SPACER SECTION
+   ACCESSIBILITY
    ============================================== */
-
-.hero-spacer {
-  min-block-size: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-inline: var(--space-md);
-  padding-block-start: 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-spacer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, color-mix(in srgb, var(--color-accent-primary) 8%, transparent), transparent),
-    linear-gradient(to bottom, var(--color-bg-primary), var(--color-bg-secondary));
-  z-index: 0;
-}
-
-.hero-spacer > * {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-brand {
-  font-size: clamp(0.85rem, 0.7rem + 0.4vw, 1.1rem);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-accent-primary);
-  margin-block-end: var(--space-md);
-}
-
-.hero-title {
-  font-size: clamp(2rem, 1.5rem + 1.5vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  margin-block-end: var(--space-md);
-  max-inline-size: 700px;
-}
-
-.hero-subtitle {
-  font-size: clamp(0.9rem, 0.8rem + 0.35vw, 1.15rem);
-  color: var(--color-text-secondary);
-  max-inline-size: 500px;
-  line-height: 1.6;
-  margin-block-end: var(--space-xl);
-}
-
-.scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xs);
-  color: var(--color-text-muted);
-  font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
-
-/* NAV */
-.nav-bar {
-  position: fixed;
-  inset-block-start: 0;
-  inset-inline: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: clamp(var(--space-md), 3vw, var(--space-2xl));
-  padding-block: var(--space-sm);
-  background: var(--color-bg-overlay);
-  backdrop-filter: blur(12px) saturate(180%);
-  border-block-end: 1px solid var(--color-border-light);
-}
-
-.nav-logo {
-  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.2rem);
-  font-weight: 800;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-
-.nav-logo span {
-  color: var(--color-accent-primary);
-}
-
-/* :has() — when page has focus-visible elements, auto-enhance nav contrast */
-main:has(:focus-visible) .nav-bar {
-  border-block-end-color: var(--color-accent-primary);
-}
-
-/* ==============================================
-   RESPONSIVE BREAKPOINTS
-   ============================================== */
-
-/* Tablet */
-@media (max-width: 768px) {
-  .hero-spacer {
-    min-block-size: 70vh;
-    padding-block-start: 70px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
-  }
-
-  .hero-subtitle {
-    font-size: clamp(0.85rem, 0.75rem + 0.3vw, 1rem);
-    max-inline-size: 90vw;
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .hero-spacer {
-    min-block-size: 65vh;
-    padding-block-start: 60px;
-    padding-inline: var(--space-sm);
-  }
-
-  .hero-title {
-    font-size: clamp(1.3rem, 1rem + 1.5vw, 2rem);
-  }
-
-  .hero-brand {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-  }
-
-  .nav-bar {
-    padding-inline: var(--space-sm);
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -266,8 +126,163 @@ main:has(:focus-visible) .nav-bar {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
-  .scroll-indicator {
-    animation: none;
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* ==============================================
+   ANALYST DASHBOARD APP LAYOUT
+   ============================================== */
+
+.dashboard-layout {
+  min-block-size: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  block-size: 56px;
+  background: var(--color-bg-card);
+  border-block-end: 1px solid var(--color-border);
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.app-name {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.time-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.8rem;
+}
+
+.time-label {
+  color: var(--color-text-secondary);
+}
+
+.time-select {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-primary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-text-muted);
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+}
+
+.workspace {
+  flex: 1;
+  padding: var(--space-xl);
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-block-end: var(--space-xl);
+  padding-block-end: var(--space-md);
+  border-block-end: 1px solid var(--color-border-light);
+}
+
+.report-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.report-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  margin-block-start: 4px;
+  font-family: var(--font-mono);
+}
+
+/* Container Queries for Responsive Workspace */
+@container (max-width: 800px) {
+  .workspace-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  .header-right {
+    gap: var(--space-sm);
+  }
+  .time-label, .app-name {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .workspace {
+    padding: var(--space-md);
+  }
+  .export-btn {
+    display: none;
   }
 }
