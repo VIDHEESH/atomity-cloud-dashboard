@@ -154,3 +154,18 @@
   }
 }
 
+@container dashboard (max-width: 480px) {
+  .dashboardCard {
+    padding: var(--space-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .heading {
+    font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+  }
+
+  .subheading {
+    font-size: clamp(0.75rem, 0.65rem + 0.25vw, 0.9rem);
+  }
+}
+

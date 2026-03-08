@@ -214,6 +214,49 @@ main:has(:focus-visible) .nav-bar {
   border-block-end-color: var(--color-accent-primary);
 }
 
+/* ==============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero-spacer {
+    min-block-size: 70vh;
+    padding-block-start: 70px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 0.75rem + 0.3vw, 1rem);
+    max-inline-size: 90vw;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hero-spacer {
+    min-block-size: 65vh;
+    padding-block-start: 60px;
+    padding-inline: var(--space-sm);
+  }
+
+  .hero-title {
+    font-size: clamp(1.3rem, 1rem + 1.5vw, 2rem);
+  }
+
+  .hero-brand {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-bar {
+    padding-inline: var(--space-sm);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

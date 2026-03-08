@@ -168,3 +168,15 @@
   }
 }
 
+@container dashboard (max-width: 480px) {
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    display: none;
+  }
+
+  .table th,
+  .dataRow td {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+  }
+}
