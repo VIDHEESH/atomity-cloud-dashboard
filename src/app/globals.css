@@ -209,6 +209,11 @@ body {
   color: var(--color-accent-primary);
 }
 
+/* :has() — when page has focus-visible elements, auto-enhance nav contrast */
+main:has(:focus-visible) .nav-bar {
+  border-block-end-color: var(--color-accent-primary);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

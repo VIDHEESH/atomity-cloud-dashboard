@@ -33,7 +33,13 @@
     text-align: start;
   }
 
-  .nameCol {
+  /* :has() — highlight entire column header when any row in that column is hovered */
+  &:has(.dataRow:hover) thead th {
+    color: color-mix(in srgb, var(--color-text-muted) 80%, var(--color-accent-primary));
+  }
+}
+
+.nameCol {
   text-align: start !important;
   min-inline-size: 120px;
 }
