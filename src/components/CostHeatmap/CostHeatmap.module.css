@@ -1,0 +1,173 @@
+.heatmapContainer {
+  inline-size: 100%;
+  position: relative;
+  padding-block: var(--space-xl);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  min-block-size: 280px;
+}
+
+.heatmapNode {
+  /* Flex basis uses the JS calculated ratio, scaled up so they wrap nicely */
+  flex-grow: calc(var(--flex-value) * 100);
+  flex-basis: calc(var(--flex-grow-value) * 100%);
+  min-inline-size: 200px;
+  max-inline-size: 100%;
+  min-block-size: 140px;
+  
+  position: relative;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  z-index: 1;
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent-primary);
+    outline-offset: 4px;
+    z-index: 20;
+  }
+
+  &.active {
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--color-accent-primary);
+  }
+}
+
+/* Three status classes defining the glow/fill colors */
+.statusOk {
+  --node-accent: var(--color-accent-primary);
+  --node-bg: var(--color-accent-primary-muted);
+}
+.statusWarning {
+  --node-accent: var(--color-accent-warning);
+  --node-bg: color-mix(in srgb, var(--color-accent-warning) 15%, transparent);
+}
+.statusCritical {
+  --node-accent: var(--color-accent-error);
+  --node-bg: color-mix(in srgb, var(--color-accent-error) 15%, transparent);
+}
+
+.heatmapNode:hover {
+  border-color: var(--node-accent);
+  box-shadow: 0 10px 40px var(--node-bg);
+}
+
+.nodeFill {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: linear-gradient(
+    to top,
+    var(--node-bg) 0%,
+    transparent 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nodeContent {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.nodeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-xl);
+}
+
+.nodeName {
+  font-size: clamp(0.85rem, 0.75rem + 0.35vw, 1rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.nodePercentage {
+  font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.8rem);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.nodeMetrics {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.totalCost {
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.8rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+/* Circular Efficiency Gauge inside the Heatmap Node */
+.gaugeContainer {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gaugeBg {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 3.5;
+}
+
+.gaugeFill {
+  fill: none;
+  stroke: var(--node-accent);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke 300ms ease;
+}
+
+.gaugeValue {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--node-accent);
+  font-family: var(--font-mono);
+}
+
+@container dashboard (max-width: 640px) {
+  .grid {
+    gap: var(--space-sm);
+  }
+  .nodeContent {
+    padding: var(--space-sm) var(--space-md);
+  }
+}

@@ -1,0 +1,163 @@
+.card {
+  margin-block-start: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: color-mix(in srgb, var(--color-accent-primary) 5%, var(--color-bg-card));
+  border: 1px solid color-mix(in srgb, var(--color-accent-primary) 18%, var(--color-border-light));
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 3px;
+    block-size: 100%;
+    background: linear-gradient(
+      to bottom,
+      var(--color-accent-primary),
+      var(--color-accent-primary-light)
+    );
+    border-radius: var(--radius-full);
+  }
+}
+
+.indicator {
+  position: absolute;
+  inset-block-start: var(--space-md);
+  inset-inline-end: var(--space-md);
+  inline-size: 8px;
+  block-size: 8px;
+}
+
+.dot {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+  z-index: 1;
+}
+
+.dotPulse {
+  position: absolute;
+  inset: -4px;
+  background: color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
+  border-radius: var(--radius-full);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.icon {
+  color: var(--color-accent-primary);
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: clamp(0.65rem, 0.55rem + 0.2vw, 0.75rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-primary);
+}
+
+.savings {
+  font-size: clamp(0.85rem, 0.75rem + 0.25vw, 1rem);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.amount {
+  color: var(--color-accent-primary);
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 0.85rem + 0.35vw, 1.25rem);
+}
+
+.detail {
+  font-size: clamp(0.7rem, 0.6rem + 0.2vw, 0.82rem);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.action {
+  color: var(--color-text-muted);
+}
+
+/* Mini efficiency bars */
+.miniBars {
+  display: flex;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-sm);
+  padding-block-start: var(--space-sm);
+  border-block-start: 1px solid var(--color-border-light);
+}
+
+.miniBarGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.miniBarTrack {
+  block-size: 4px;
+  background: color-mix(in srgb, var(--color-border) 40%, transparent);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.miniBarFill {
+  block-size: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s ease-out;
+}
+
+.miniBarFill.ok {
+  background: var(--color-accent-primary);
+}
+
+.miniBarFill.low {
+  background: var(--color-accent-warning);
+}
+
+.miniBarLabel {
+  font-size: clamp(0.55rem, 0.5rem + 0.1vw, 0.65rem);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Responsive */
+@container dashboard (max-width: 480px) {
+  .card {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .miniBars {
+    gap: var(--space-xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotPulse {
+    animation: none;
+    opacity: 0;
+  }
+}
