@@ -4,7 +4,8 @@
    DESIGN TOKENS — Single source of truth
    ============================================== */
 
-:root {
+:root,
+[data-theme="light"] {
   /* Colors */
   --color-bg-primary: #f5f6f8;
   --color-bg-secondary: #ebedf2;
@@ -51,6 +52,31 @@
   --font-mono: var(--font-geist-mono), "SF Mono", "Cascadia Code", monospace;
 }
 
+/* Dark Mode Tokens */
+[data-theme="dark"] {
+  --color-bg-primary: #0c0d10;
+  --color-bg-secondary: #141519;
+  --color-bg-tertiary: #1a1b21;
+  --color-bg-card: #16171d;
+  --color-bg-card-hover: #1d1e26;
+  --color-bg-overlay: rgba(12, 13, 16, 0.9);
+  --color-text-primary: #f0f1f4;
+  --color-text-secondary: #9399a5;
+  --color-text-muted: #5a5e6a;
+  --color-accent-primary: #3ecf7b;
+  --color-accent-primary-light: #6ee8a4;
+  --color-accent-primary-muted: rgba(62, 207, 123, 0.15);
+  --color-accent-success: #3ecf7b;
+  --color-accent-warning: #f5b731;
+  --color-accent-error: #f06565;
+  --color-border: #2a2c33;
+  --color-border-light: #1f2028;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 40px rgba(62, 207, 123, 0.12);
+}
+
 @theme inline {
   --color-background: var(--color-bg-primary);
   --color-foreground: var(--color-text-primary);
@@ -67,6 +93,7 @@
 }
 
 body {
+  transition: background-color 400ms ease-out, color 400ms ease-out;
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-primary);
