@@ -1,0 +1,86 @@
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-accent-primary) 8%, transparent),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+.chartSkeleton {
+  inline-size: 100%;
+  block-size: clamp(200px, 30vw, 320px);
+  padding-block: var(--space-xl);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.barsSkeleton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2xl);
+  block-size: 80%;
+  inline-size: 100%;
+}
+
+.barSkeleton {
+  inline-size: 100px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.tableSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-block: var(--space-md);
+}
+
+.rowSkeleton {
+  display: flex;
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+}
+
+.cellSkeleton {
+  flex: 1;
+  block-size: 20px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+  }
+}
