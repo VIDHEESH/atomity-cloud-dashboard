@@ -1,0 +1,4 @@
+node_modules
+.next
+.git
+create-git-history.js
