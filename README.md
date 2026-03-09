@@ -4,7 +4,7 @@ A scroll-triggered, animated **Cluster Efficiency Dashboard** section built for 
 
 > **Feature chosen:** Option A — Cluster Efficiency (0:30–0:40 in the video)
 
-🔗 **Live demo:** [https://atomity-cloud-dashboard.vercel.app](https://atomity-cloud-dashboard.vercel.app)
+🔗 **Live demo:** [https://atomity-cloud-dashboard-rxj2.vercel.app/](https://atomity-cloud-dashboard-rxj2.vercel.app/)
 
 ---
 
